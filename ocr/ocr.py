@@ -57,9 +57,6 @@ class ExemplarMatcher:
         possible = set()
         imcarr = np.asarray(imc).astype(float)
         for val, ind, im in self.get_exemplars():
-            # print(val)
-            # print(ind)
-            # print(im)
             err = np.asarray(im).astype(float) - imcarr
             if 0 < np.abs(err).sum() < self.guess_thresh:
                 possible.add(val)

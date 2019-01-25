@@ -20,14 +20,16 @@ fmt_sshot = r'S_%06d.png'
 
 def playback_gesture(s, move):
     print(move)
-    return {
-        "left": s.swipe_left(),
-        "right": s.swipe_right(),
-        "up": s.swipe_up(),
-        "down": s.swipe_down()
-      }[move]
-    
-    
+    w, h = s.window_size()
+    if move == 'left':
+      s.swipe(w/2, h/2, 0, h/2, 0.01), # left
+    elif move == 'right':
+      s.swipe(w/2, h/2, w, h/2, 0.01), # right
+    elif move == 'up':
+      s.swipe(w/2, h/2, w/2, 0, 0.01), # up
+    elif move == 'down':
+      s.swipe(w/2, h/2, w/2, h, 0.01)  # down
+
 
 class IOSAssistant:
     def __init__(self, client, session, ocr):

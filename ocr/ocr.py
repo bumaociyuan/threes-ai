@@ -7,6 +7,12 @@ import glob
 import sys
 from .devices import CONFIGS
 
+try:
+    from PIL import Image
+except ImportError:
+    import Image
+import pytesseract
+
 DNAME = os.path.dirname(__file__)
 
 PY3 = sys.version_info[0] >= 3
@@ -54,6 +60,11 @@ class ExemplarMatcher:
         self.loaded = True
 
     def guess_classify(self, imc):
+    	# ocr_result = pytesseract.image_to_string(imc, lang='eng', config='--psm 10 --oem 3 -c tessedit_char_whitelist=12346789')
+    	# if ocr_result == "":
+    	# 	ocr_result = "0"
+    	# return ocr_result
+
         possible = set()
         imcarr = np.asarray(imc).astype(float)
         for val, ind, im in self.get_exemplars():
